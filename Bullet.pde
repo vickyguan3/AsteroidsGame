@@ -1,12 +1,12 @@
 class Bullet extends Floater
 {
-  public Bullet(SpaceShip bob)
+  public Bullet(Spaceship bob)
   {
     corners=0;
     myColor=color(145,208,0);
     myPointDirection=bob.getPointDirection();
-    myCenterX=one.getX();
-    myCenterY=one.getY();
+    myCenterX=bob.getX();
+    myCenterY=bob.getY();
     double dRadians=myPointDirection*(Math.PI/180);
     myDirectionX=10*Math.cos(dRadians)+bob.getDirectionX();
     myDirectionY=10*Math.sin(dRadians)+bob.getDirectionY();
