@@ -1,4 +1,4 @@
-ArrayList <Asteroid> ketchup
+ArrayList <Asteroid> ketchup;
 Spaceship bob;
 Star[] koko = new Star[200];
 boolean release;
@@ -12,7 +12,11 @@ public void setup()
 	for(int i = 0; i < koko.length; i++){
 		koko[i] = new Star();
 	}
+	for(int i = 0; i < ketchup.size; i++){
+		ketchup[i] = new Asteroid();
+	}
 	ketchup = new ArrayList <Asteroid> ();
+	shoot = new ArrayList <Bullet> ();
 }
 public void draw() 
 {
@@ -22,29 +26,29 @@ public void draw()
   for (int i = 0; i < koko.length; i++){
   	koko[i].show();
   }
-}
+  for(int i=0; 1< ketchup.size(); i++){
+  	ketchup.get(i).show();
+  	ketchup.get(i).move();
+  }
 
-{ 
-  background(0);
   if(dog>0)
   {
     if(mousePressed)
     {
       shoot.add(new Bullet(bob));
     }
-    for(int j=0;j<koko.length;j++){
+	for(int j=0;j<koko.length;j++){
     	koko[j].show();
 	}
-    for(int i=0;i<ketchup.size();i++)
+	for(int i=0;i<ketchup.size();i++)
     {
       ketchup.get(i).show();
-      ketchup.get(i).rotate(2);
+      ketchup.get(i).turn(2);
       ketchup.get(i).move();
-      if(dist(bob.getX(),bob.getY(),ketchup.get(i).getX(),ketchup.get(i).getY())<30)
+	if(dist(bob.getX(),bob.getY(),ketchup.get(i).getX(),ketchup.get(i).getY())<30)
       {
         ketchup.remove(i);
         ketchup.add(i, new Asteroid());
-        dog--;
       }
     } 
     for(int k=0;k<shoot.size();k++)
@@ -54,13 +58,12 @@ public void draw()
       shoot.get(k).accelerate(2);
       for(int z=(ketchup.size()-1);z>=0;z--)
       {
-        if(dist(ketchup.get(z).getX(),ketchup.get(z).getY(),shot.get(k).getX(),shoot.get(k).getY())<20)
+        if(dist(ketchup.get(z).getX(),ketchup.get(z).getY(),shoot.get(k).getX(),shoot.get(k).getY())<20)
         { 
           ketchup.remove(z);
           shoot.remove(k);
           ketchup.add(new Asteroid());
           cat++;
-          break;
         }
       }
     }
@@ -86,8 +89,8 @@ public void draw()
   {
     fill(255);
     textAlign(CENTER);
-    text("GAME OVER",320,240);
-    text("SCORE: "+cat,320,280);
+    text("Game Over :(",320,240);
+    text("Score: "+cat,320,280);
   }
 }
 
@@ -96,7 +99,7 @@ public void keyPressed()
 {
 	if(key=='w'){
    		release=true;
-   		one.accelerate(0.5);
+   		bob.accelerate(0.5);
 	}
 	if(keyCode == LEFT){
 		bob.turn(-20);
